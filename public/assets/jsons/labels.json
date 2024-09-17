@@ -1,4 +1,13 @@
-{
-  "welcomeMessage": "Welcome to our application!",
-  "logout": "Log Out"
+{ 
+  "header":{
+    "student":{
+
+    },
+    "teacher":{
+      
+    }
+  },
+  "logIn-SignUp":{
+
+  }
 }

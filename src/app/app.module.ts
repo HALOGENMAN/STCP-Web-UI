@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { provideHttpClient } from '@angular/common/http';
 import { ConfigService } from '../app/shared/services/config.service';
 import { LabelsService } from './shared/services/labels.service';
+import {LogInSignUpComponent} from './log-in-sign-up/log-in-sign-up.component'
+import { HeaderComponent } from './shared/common/header/header.component';
+import { RouterModule } from '@angular/router';
 
 export function initializeApp(labelsService: LabelsService,configService:ConfigService) {
  const labelsPromice: Promise<boolean> = labelsService.load();
@@ -19,10 +22,12 @@ export function initializeApp(labelsService: LabelsService,configService:ConfigS
 @NgModule({
   declarations: [
     AppComponent,  // Declare all components, pipes, and directives here
+    LogInSignUpComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule  // Import other Angular modules here (e.g., FormsModule, HttpClientModule)
+    AppRoutingModule,
   ],
   providers: [
     provideHttpClient(),

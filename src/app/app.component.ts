@@ -9,11 +9,4 @@ import {ConfigService} from './shared/services/config.service'
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'STCP-Web-UI';
-  lables:any;
-  config:any;
-  constructor(private labelsService:LabelsService, private configService:ConfigService){
-    this.lables = labelsService.lables;
-    this.config = configService.config
-  }
 }
