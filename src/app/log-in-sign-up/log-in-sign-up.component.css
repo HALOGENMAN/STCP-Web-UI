@@ -1,0 +1,48 @@
+.heading{
+  color: var(--c2);
+}
+
+.lineBreak{
+  width: 1rem;
+  background-color: beige;
+}
+
+.rect-top-left {
+  background-color: var(--c3);
+  height: 50vh; /* 50% of viewport height */
+}
+.rect-bottom-right {
+  background-color: var(--c4);
+  height: 50vh; /* 50% of viewport height */
+}
+
+.rect-center {
+  background-color: var(--bc1);
+  width: 700px; /* width of the center rectangle */
+  height: 550px; /* height of the center rectangle */
+  box-shadow: var(--shadow); /* shadow effect */
+  border-radius: 10px;
+}
+
+.lineBreak{
+  height: 2px;
+  background-color: var(--c1);
+  width: 100%;
+}
+
+.container-for-signUp{
+  display: grid;
+  grid-template-columns: 48% 4% 48%;
+}
+
+.forStudent, .forTeacher{
+
+}
+
+.google-btn-style{
+  padding: 10px !important; 
+}
+
+.card-custom-style{
+  cursor: pointer;
+}

@@ -9,6 +9,9 @@ import { LabelsService } from './shared/services/labels.service';
 import {LogInSignUpComponent} from './log-in-sign-up/log-in-sign-up.component'
 import { HeaderComponent } from './shared/common/header/header.component';
 import { RouterModule } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
 
 export function initializeApp(labelsService: LabelsService,configService:ConfigService) {
  const labelsPromice: Promise<boolean> = labelsService.load();
@@ -28,6 +31,9 @@ export function initializeApp(labelsService: LabelsService,configService:ConfigS
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NgbModule,
+    CommonModule,
+    BrowserAnimationsModule
   ],
   providers: [
     provideHttpClient(),

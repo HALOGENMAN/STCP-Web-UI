@@ -5,5 +5,19 @@
   --c4: #A4A71e;
   --C5: #D6CE15;
 
+  /* backgroungs */
+  --bc1:rgb(231, 231, 231);
+
+  --shadow:0px 4px 8px rgba(0, 0, 0, 0.2);
+  --selected-comp:rgba(10, 10, 10, 0.1);
+
   --font-size: 16px;
+  --font:"Oswald", sans-serif;
+}
+
+*{
+  box-sizing: border-box;
+  font-family: var(--font);
+  padding: 0px;
+  margin: 0px;
 }
