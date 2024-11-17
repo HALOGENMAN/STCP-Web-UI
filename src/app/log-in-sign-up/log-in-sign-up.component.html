@@ -1,3 +1,4 @@
+<p-toast />
 <div class="container-fluid h-100">
   <div class="row h-100">
     <!-- Top Left Rectangle -->
@@ -55,13 +56,14 @@
       <div class="container-fluid  p-2">
         <div class="row text-center">
           <h6>please select your Role</h6>
-          https://youtu.be/EO-U01u9vFQ?si=WSs5oG4Cqje0XNrz
+          
         </div>
       </div>
-    
-      <div [style]="{'display':selectedRole==''?'none':'block'}" class="pl-4 pt-1 pr-4 container text-center">
+      <button class="btn" style="background-color: #D6CE15;" (click)="login()"> login </button>
+      <!-- google login not enaled yet -->
+      <!-- <div [style]="{'display':selectedRole==''?'none':'block'}" class="pl-4 pt-1 pr-4 container text-center">
         <div class="google-btn"></div> 
-      </div>
+      </div> -->
 
     </div>
   </div>

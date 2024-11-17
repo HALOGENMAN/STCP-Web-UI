@@ -1,6 +1,8 @@
 declare var google:any
 import { Component , OnInit} from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { AuthService } from '../shared/services/auth.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-log-in-sign-up',
@@ -20,6 +22,11 @@ export class LogInSignUpComponent implements OnInit{
   isHoveredForStudent:boolean = false;
   isHoveredForTeacher:boolean = false;
   selectedRole:string="";
+
+  constructor(
+    private authService: AuthService, 
+    private messageService:MessageService
+  ){}
 
   ngOnInit(): void {
     google.accounts.id.initialize({
@@ -43,6 +50,25 @@ export class LogInSignUpComponent implements OnInit{
 
   selectRole(role:string):void{
     this.selectedRole = role;
+  }
+
+  login(){
+    this.authService.login().subscribe({
+      next:(res)=>{
+        sessionStorage.setItem('token',res.token)
+        sessionStorage.setItem('name',res.name)
+        sessionStorage.setItem('email',res.email)
+        sessionStorage.setItem('role',res.role)
+      },
+      error:(e)=>{
+        this.toast('error','Error',e)
+      }
+    })
+  }
+
+  toast(severity='success',summary='Success',detail = 'Message Content'):void{
+    console.log({ severity, summary, detail})
+    this.messageService.add({ severity, summary, detail});
   }
 
 }
