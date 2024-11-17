@@ -3,6 +3,7 @@ import { Component , OnInit} from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AuthService } from '../shared/services/auth.service';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-log-in-sign-up',
@@ -25,7 +26,8 @@ export class LogInSignUpComponent implements OnInit{
 
   constructor(
     private authService: AuthService, 
-    private messageService:MessageService
+    private messageService:MessageService,
+    private router: Router
   ){}
 
   ngOnInit(): void {
@@ -52,13 +54,21 @@ export class LogInSignUpComponent implements OnInit{
     this.selectedRole = role;
   }
 
+  setDataInSession(data:any):void{
+    sessionStorage.setItem('token',data.token)
+    sessionStorage.setItem('name',data.name)
+    sessionStorage.setItem('email',data.email)
+    sessionStorage.setItem('role',data.role)
+  }
+
   login(){
     this.authService.login().subscribe({
       next:(res)=>{
-        sessionStorage.setItem('token',res.token)
-        sessionStorage.setItem('name',res.name)
-        sessionStorage.setItem('email',res.email)
-        sessionStorage.setItem('role',res.role)
+        this.setDataInSession(res);
+        if(res.role === 'teacher'){
+          this.router.navigate(['/teacher'], { state: { res } })
+        }
+
       },
       error:(e)=>{
         this.toast('error','Error',e)

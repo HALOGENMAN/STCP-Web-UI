@@ -8,14 +8,14 @@ import { ConfigService } from '../app/shared/services/config.service';
 import { LabelsService } from './shared/services/labels.service';
 import {LogInSignUpComponent} from './log-in-sign-up/log-in-sign-up.component'
 import { HeaderComponent } from './shared/common/header/header.component';
-import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { authInterceptor } from './shared/services/auth.interceptor';
+import { TeacherComponent } from './teacher/teacher.component';
+import { ProfileComponent } from './teacher/profile/profile.component';
 
 export function initializeApp(labelsService: LabelsService,configService:ConfigService) {
  const labelsPromice: Promise<boolean> = labelsService.load();
@@ -30,7 +30,9 @@ export function initializeApp(labelsService: LabelsService,configService:ConfigS
   declarations: [
     AppComponent,  // Declare all components, pipes, and directives here
     LogInSignUpComponent,
-    HeaderComponent
+    HeaderComponent,
+    TeacherComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
