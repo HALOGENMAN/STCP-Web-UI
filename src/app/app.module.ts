@@ -16,6 +16,11 @@ import { MessageService } from 'primeng/api';
 import { authInterceptor } from './shared/services/auth.interceptor';
 import { TeacherComponent } from './teacher/teacher.component';
 import { ProfileComponent } from './teacher/profile/profile.component';
+import {ReactiveFormsModule} from '@angular/forms';
+
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { ChipModule } from 'primeng/chip';
 
 export function initializeApp(labelsService: LabelsService,configService:ConfigService) {
  const labelsPromice: Promise<boolean> = labelsService.load();
@@ -35,8 +40,12 @@ export function initializeApp(labelsService: LabelsService,configService:ConfigS
     ProfileComponent,
   ],
   imports: [
+    NgbNavModule,
+    ReactiveFormsModule,
+    ScrollPanelModule,
     BrowserModule,
     ToastModule,
+    ChipModule,
     AppRoutingModule,
     NgbModule,
     CommonModule,

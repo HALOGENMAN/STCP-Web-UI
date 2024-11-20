@@ -1,1 +1,112 @@
-<p>profile works!</p>
+<form [formGroup]="profile" (ngSubmit)="onSubmit()">
+  <!-- <p-scrollPanel [style]="{ width: '100%', height: '200px' }" styleClass="custombar1"> -->
+    <!-- full name -->
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Full Name</span>
+      </div>
+      <input type="text" class="form-control" formControlName="name" placeholder="full name" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    
+
+    <!-- summary -->
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Summary</span>
+      </div>
+      <textarea class="form-control" aria-label="With textarea" placeholder="max 500 character" formControlName="summary"></textarea>
+    </div>
+    
+    <!-- subject tought -->
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Subject Tought</span>
+      </div>
+      <input type="text" list="subject" #subject class="form-control" placeholder="subject you can teach">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" (click)="addSubject(subject)">Add</button>
+      </div>
+      <datalist id="subject">
+        <option value="Maths">
+        <option value="Science">
+      </datalist>
+      
+    </div>
+    <div class="added_subjects" style="font-size: small;">
+      @for (subject of subjectTeach.value; track subject; let idx = $index) {
+          <p-chip styleClass="pl-0 pr-3" [removable]="true"  (onRemove)="removeSubject($event,idx)">
+            <span class="ml-2 font-small" style="padding: 3px 5px 3px 5px; ">
+                {{subject}}
+            </span>
+          </p-chip>
+        }
+    </div>
+
+    <!-- education -->
+    <div formArrayName="education" class="mb-3">
+      <div *ngFor="let edu of education.controls; let i = index" [formGroupName]="i" class="education-entry">
+        <div>Education {{ i + 1 }}</div>
+        
+        <!-- Degree -->
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Degree</span>
+          <input type="text" class="form-control" placeholder="e.g., BSc Computer Science or 12th class" formControlName="degree" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div *ngIf="edu.get('degree')?.invalid && edu.get('degree')?.touched" class="error">
+          Degree is required.
+        </div>
+
+        <!-- Institution -->
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Institution</span>
+          <input type="text" class="form-control" placeholder="e.g., ABC University or XYZ high school" formControlName="institution" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div *ngIf="edu.get('institution')?.invalid && edu.get('institution')?.touched" class="error">
+          Institution is required.
+        </div>
+
+        <!-- Year -->
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Year of Graduation</span>
+          <input type="text" class="form-control" placeholder="e.g., 2020" formControlName="year" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div *ngIf="edu.get('year')?.invalid && edu.get('year')?.touched" class="error">
+          Valid year is required.
+        </div>
+
+        <!-- Grade -->
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Grade</span>
+          <input type="text" class="form-control" placeholder="e.g., A+ ot 83.20% or 7.8cgpa" formControlName="grade" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div *ngIf="edu.get('grade')?.invalid && edu.get('grade')?.touched" class="error">
+          Grade is required.
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="file" class="form-control" id="inputGroupFile02" (change)="onFileChange($event,i)">
+          <label class="input-group-text" for="inputGroupFile02" >Upload Degree</label>
+        </div>
+
+        <!-- Remove Button -->
+        <button class="btn"  type="button" (click)="removeEducation(i)" [disabled]="education.length === 1">Remove Education</button>
+      </div>
+    </div>
+    
+    <!-- Language -->
+    <!-- <div>
+      <label for="">Language*:</label>
+      <input list="language" id="suggestions" name="" placeholder="Language can speak">
+      <datalist id="language">
+        <option value="English">
+        <option value="Hindi">
+      </datalist>
+    </div> -->
+    <div class="mb-3">
+      <button class="btn" style="background-color: aqua;"  type="button" (click)="addEducation()">Add Education</button>
+    </div>
+    <div class="mb-3">
+      <button type="submit" class="btn" style="background-color: var(--C5);">submit</button>
+    </div>
+  <!-- </p-scrollPanel> -->
+</form>

@@ -8,8 +8,16 @@ import { Component , OnInit} from '@angular/core';
   styleUrl: './teacher.component.css'
 })
 export class TeacherComponent implements OnInit{
+  userInfo:any = null;
+  active = 1;
+
+  constructor(){}
+
   ngOnInit(): void {
-    console.log(history.state)
+    this.userInfo = history.state.user
   }
   
+  navChange(event:any){
+    // console.log(event)
+  }
 }

@@ -1,0 +1,8 @@
+.headder{
+  height: 45px;
+  background-color: var(--c4);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+}
+

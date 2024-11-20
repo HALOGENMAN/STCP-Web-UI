@@ -66,7 +66,7 @@ export class LogInSignUpComponent implements OnInit{
       next:(res)=>{
         this.setDataInSession(res);
         if(res.role === 'teacher'){
-          this.router.navigate(['/teacher'], { state: { res } })
+          this.router.navigate(['/teacher'], { state: { user:res } })
         }
 
       },
