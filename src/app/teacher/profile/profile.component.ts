@@ -51,23 +51,51 @@ export class ProfileComponent implements OnInit{
     return this.profile.get('education') as FormArray;
   }
 
+  get languages(): FormArray {
+    return this.profile.get('languages') as FormArray;
+  }
+
   get subjectTeach(): FormArray {
     return this.profile.get('subjectTeach') as FormArray;
   }
 
+  get profileImage() {
+    return this.profile.get('profileImage');
+  }
+
+  get resume() {
+    return this.profile.get('resume');
+  }
+
   // Add a new education entry
-  addEducation(): void {
-    this.education.push(this.createEducation());
+  addValue(value:string): void {
+    if(value==='education'){
+      this.education.push(this.createEducation());
+    }
+    if(value==='language'){
+      this.languages.push(this.addLanguage());
+    }
   }
 
   // Remove an education entry at a specified index
-  removeEducation(index: number): void {
-    if (this.education.length > 1) {
-      this.education.removeAt(index);
-    } else {
-      alert('At least one education entry is required');
+  removeValue(index: number,value:string): void {
+    if(value==='education'){
+      if (this.education.length > 1) {
+        this.education.removeAt(index);
+      } else {
+        alert('At least one education entry is required');
+      }
+    }
+    if(value==='language'){
+      if (this.languages.length > 1) {
+        this.languages.removeAt(index);
+      } else {
+        alert('At least one Language entry is required');
+      }
     }
   }
+
+  
 
   addSubject(subject:any){
     let duplica = false;
@@ -91,11 +119,29 @@ export class ProfileComponent implements OnInit{
     this.subjectTeach.setValue(allSubjects)
   }
 
-  onFileChange(event:any,i:number){
+  onDegreeFileChange(event:any,i:number){
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
       this.education.at(i).get('file')?.setValue(file)
+    }
+  }
+
+  onProfilePicFileChange(event:any){
+    console.log("onProfilePicFileChange")
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      this.profileImage?.setValue(file);
+    }
+  }
+
+  onResumeFileChange(event:any){
+    console.log("onResumeFileChange")
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      this.profile.get('resume')?.setValue(file);
     }
   }
 

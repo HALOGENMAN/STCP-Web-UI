@@ -7,8 +7,6 @@
       </div>
       <input type="text" class="form-control" formControlName="name" placeholder="full name" aria-label="Username" aria-describedby="basic-addon1">
     </div>
-    
-
     <!-- summary -->
     <div class="input-group mb-3">
       <div class="input-group-prepend">
@@ -16,7 +14,6 @@
       </div>
       <textarea class="form-control" aria-label="With textarea" placeholder="max 500 character" formControlName="summary"></textarea>
     </div>
-    
     <!-- subject tought -->
     <div class="input-group mb-3">
       <div class="input-group-prepend">
@@ -32,6 +29,7 @@
       </datalist>
       
     </div>
+    
     <div class="added_subjects" style="font-size: small;">
       @for (subject of subjectTeach.value; track subject; let idx = $index) {
           <p-chip styleClass="pl-0 pr-3" [removable]="true"  (onRemove)="removeSubject($event,idx)">
@@ -84,27 +82,77 @@
         </div>
 
         <div class="input-group mb-3">
-          <input type="file" class="form-control" id="inputGroupFile02" (change)="onFileChange($event,i)">
+          <input type="file" class="form-control" id="inputGroupFile02" (change)="onDegreeFileChange($event,i)">
           <label class="input-group-text" for="inputGroupFile02" >Upload Degree</label>
         </div>
 
         <!-- Remove Button -->
-        <button class="btn"  type="button" (click)="removeEducation(i)" [disabled]="education.length === 1">Remove Education</button>
+        <button class="btn"  type="button" (click)="removeValue(i,'education')" [disabled]="education.length === 1">Remove Education</button>
       </div>
     </div>
-    
-    <!-- Language -->
-    <!-- <div>
-      <label for="">Language*:</label>
-      <input list="language" id="suggestions" name="" placeholder="Language can speak">
-      <datalist id="language">
-        <option value="English">
-        <option value="Hindi">
-      </datalist>
-    </div> -->
     <div class="mb-3">
-      <button class="btn" style="background-color: aqua;"  type="button" (click)="addEducation()">Add Education</button>
+      <button class="btn" style="background-color: aqua;"  type="button" (click)="addValue('education')">Add Education</button>
     </div>
+    <!-- languages can spak read write-->
+    <div formArrayName="languages" class="mb-3">
+      <div *ngFor="let edu of languages.controls; let i = index" [formGroupName]="i" class="language-entry">
+        <div>Language {{ i + 1 }}</div>
+        
+        <!-- language -->
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">language</span>
+          <input type="text" class="form-control" placeholder="e.g. English" formControlName="language" aria-label="Language" aria-describedby="basic-addon1">
+        </div>
+        <div *ngIf="edu.get('degree')?.invalid && edu.get('degree')?.touched" class="error">
+          Language is required
+        </div>
+
+        <!-- speak -->
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">speak</span>
+          <input type="number" class="form-control" placeholder="0" formControlName="speak" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <div *ngIf="edu.get('institution')?.invalid && edu.get('institution')?.touched" class="error">
+          speak is required.
+        </div>
+
+        <!-- read -->
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Read</span>
+          <input type="number" class="form-control" placeholder="0" formControlName="read" aria-label="read" aria-describedby="basic-addon1">
+        </div>
+        <div *ngIf="edu.get('year')?.invalid && edu.get('year')?.touched" class="error">
+          Read is required.
+        </div>
+
+        <!-- read -->
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="basic-addon1">Write</span>
+          <input type="number" class="form-control" placeholder="0" formControlName="write" aria-label="write" aria-describedby="basic-addon1">
+        </div>
+        <div *ngIf="edu.get('year')?.invalid && edu.get('year')?.touched" class="error">
+          Write is required.
+        </div>
+
+        <!-- Remove Button -->
+        <button class="btn"  type="button" (click)="removeValue(i,'language')" [disabled]="languages.length === 1">Remove Language</button>
+      </div>
+    </div>
+    <div class="mb-3">
+      <button class="btn" style="background-color: aqua;"  type="button" (click)="addValue('language')">Add Language</button>
+    </div>
+    
+    <!-- profile picture -->
+    <div class="input-group mb-3">
+      <label class="input-group-text" for="profilePic" >Profile Picture</label>
+      <input type="file" class="form-control" id="profilePic" (change)="onProfilePicFileChange($event)">
+    </div>
+    <!-- resume -->
+    <div class="input-group mb-3">
+      <label class="input-group-text" for="resume" >Resume</label>
+      <input type="file" class="form-control" id="resume" (change)="onResumeFileChange($event)">
+    </div>
+
     <div class="mb-3">
       <button type="submit" class="btn" style="background-color: var(--C5);">submit</button>
     </div>
